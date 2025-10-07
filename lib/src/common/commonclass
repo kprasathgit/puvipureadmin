@@ -1,0 +1,44 @@
+
+/// -------------------------
+/// Validators class
+/// -------------------------
+class Validators {
+  static String? required(String? value) =>
+      value == null || value.isEmpty ? 'Required' : null;
+
+  /// Price: must be > 0
+  static String? price(String? value) {
+    if (value == null || value.isEmpty) return 'Required';
+    final n = double.tryParse(value);
+    if (n == null || n.isNaN || n.isInfinite) return 'Must be a valid number';
+    if (n <= 0) return 'Must be greater than 0';
+    return null;
+  }
+
+  /// Price Qty: 0 allowed, cannot be negative
+  static String? priceQty(String? value) {
+    if (value == null || value.isEmpty) return 'Required';
+    final n = double.tryParse(value);
+    if (n == null || n.isNaN || n.isInfinite) return 'Must be a valid number';
+    if (n <= 0) return 'Cannot be negative or Zero';
+    return null;
+  }
+
+  /// Stock Qty: 0 allowed, cannot be negative
+  static String? stock(String? value) {
+    if (value == null || value.isEmpty) return 'Required';
+    final n = double.tryParse(value);
+    if (n == null || n.isNaN || n.isInfinite) return 'Must be a valid number';
+    if (n < 0) return 'Cannot be negative';
+    return null;
+  }
+
+  /// Integer fields
+  static String? intNumber(String? value) {
+    if (value == null || value.isEmpty) return 'Required';
+    final n = int.tryParse(value);
+    if (n == null) return 'Must be an integer';
+    if (n < 0) return 'Cannot be negative';
+    return null;
+  }
+}
